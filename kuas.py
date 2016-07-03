@@ -61,3 +61,17 @@ if __name__ == '__main__':
 	else:
 		print( 'Please input a valid number !' )
 """
+
+
+# Here for person B
+
+def getcontent( url ):
+	s = requests.session()
+	r = s.get( url )
+	r.encoding = 'utf-8'
+	tree = etree.HTML( r.text )
+	content_div = tree.xpath( '//div[@class="ptcontent clearfix floatholder"]' )[ 0 ]
+	string = "".join( [ x for x in content_div.itertext() ])
+	for s in string.split( '\n' ):
+		if not s.strip() == "":
+			print( s )
